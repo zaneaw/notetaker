@@ -1,9 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
-// TODO - fix TS stuff
-
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
@@ -15,7 +9,6 @@ export const topicRouter = createTRPCRouter({
       },
     });
   }),
-
   create: protectedProcedure
     .input(z.object({ title: z.string() }))
     .mutation(({ ctx, input }) => {
@@ -23,7 +16,7 @@ export const topicRouter = createTRPCRouter({
         data: {
           title: input.title,
           userId: ctx.session.user.id,
-        }
-      })
-    })
+        },
+      });
+    }),
 });
